@@ -6,9 +6,16 @@
         "source": "github",
         "repo": "obra/superpowers"
       }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "juliusbrussee/caveman"
+      }
     }
   },
   "enabledPlugins": {
-    "superpowers@superpowers-dev": true
+    "superpowers@superpowers-dev": true,
+    "caveman@caveman": true
   }
 }
