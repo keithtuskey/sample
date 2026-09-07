@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tucky — settings</title>
+  <link rel="stylesheet" href="../ui/base.css">
+  <style>
+    body { padding: 40px 24px 80px; }
+    .wrap { max-width: 660px; margin: 0 auto; }
+    .hero { display: flex; gap: 14px; align-items: center; margin-bottom: 8px; }
+    .hero h1 { margin: 0; font-size: 20px; }
+    .hero p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    section {
+      background: var(--raise); border: 1px solid var(--line); border-radius: 14px;
+      padding: 18px 20px; margin-top: 16px;
+    }
+    section h2 { margin: 0 0 4px; font-size: 14px; }
+    section > p.lead { margin: 0 0 14px; color: var(--muted); font-size: 12.5px; }
+    .field { margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    .inline { display: flex; gap: 8px; align-items: center; }
+    .check { display: flex; gap: 9px; align-items: flex-start; margin-bottom: 10px; }
+    .check input { width: auto; margin-top: 2px; }
+    .check span { font-size: 12.5px; }
+    .check span small { display: block; color: var(--muted); font-size: 11.5px; }
+    .status { font-size: 12px; color: var(--muted); min-height: 16px; }
+    .danger { color: #b91c1c; border-color: rgba(185, 28, 28, .4); }
+    @media (prefers-color-scheme: dark) { .danger { color: #fca5a5; } }
+    ul.hosts { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    ul.hosts button { font-size: 11.5px; }
+    .kbd { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: var(--muted); }
+    .kbd div { min-width: 46%; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <img src="../icons/icon128.png" alt="" width="52" height="52">
+      <div>
+        <h1>Tucky</h1>
+        <p>Notes at the edge, an agent inside. Everything stays encrypted on this machine.</p>
+      </div>
+    </div>
+
+    <section id="welcome" class="hidden">
+      <h2>Two things and you're set</h2>
+      <p class="lead">
+        Your notes work right now — press <code>Alt+Shift+N</code> on any page, or reach for the
+        stripe at the right edge. To wake the agent, paste an Anthropic API key below.
+      </p>
+    </section>
+
+    <section>
+      <h2>The agent</h2>
+      <p class="lead">
+        Your key is stored inside the encrypted vault and sent only to Anthropic, straight from
+        this browser. Get one at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noreferrer">console.anthropic.com</a>.
+      </p>
+      <div class="field">
+        <label for="api-key">Anthropic API key</label>
+        <div class="inline">
+          <input id="api-key" type="password" placeholder="sk-ant-…" autocomplete="off">
+          <button id="save-key" class="primary">Save</button>
+        </div>
+        <p id="key-status" class="status"></p>
+      </div>
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model"></select>
+      </div>
+      <div class="field">
+        <label for="effort">Effort</label>
+        <select id="effort">
+          <option value="low">Low — quick answers</option>
+          <option value="medium">Medium</option>
+          <option value="high">High — the default</option>
+          <option value="xhigh">Extra high — think it through</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <h2>Connectors</h2>
+      <p class="lead">What the agent may reach for on your behalf. Notes are always in reach.</p>
+      <label class="check"><input type="checkbox" id="c-page">
+        <span>This page<small>Read the title, URL, your selection and the readable text of the tab you're on.</small></span></label>
+      <label class="check"><input type="checkbox" id="c-tabs">
+        <span>Open tabs<small>List the tabs in the current window.</small></span></label>
+      <label class="check"><input type="checkbox" id="c-history">
+        <span>History<small>Search pages you've visited. Chrome will ask for permission.</small></span></label>
+      <label class="check"><input type="checkbox" id="c-bookmarks">
+        <span>Bookmarks<small>Search your bookmarks. Chrome will ask for permission.</small></span></label>
+    </section>
+
+    <section>
+      <h2>The edge</h2>
+      <p class="lead">Where Tucky sleeps, and how far it fans out when you reach over.</p>
+      <label class="check"><input type="checkbox" id="show-edge">
+        <span>Show the stripe on pages<small>Off means Tucky lives only in the popup and side panel.</small></span></label>
+      <label class="check"><input type="checkbox" id="peek">
+        <span>Fan out on hover<small>Off means you click the stripe to open it.</small></span></label>
+      <div class="field">
+        <label for="side">Side</label>
+        <select id="side">
+          <option value="right">Right edge</option>
+          <option value="left">Left edge</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fan">Notes in the fan: <span id="fan-value">7</span></label>
+        <input id="fan" type="range" min="3" max="12" step="1">
+      </div>
+      <div class="field">
+        <label>Hidden on these sites</label>
+        <ul id="hosts" class="hosts"></ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Encryption</h2>
+      <p class="lead" id="vault-lead"></p>
+      <div class="field">
+        <label for="pass-current">Current passphrase (only if you already set one)</label>
+        <input id="pass-current" type="password" autocomplete="current-password">
+      </div>
+      <div class="field">
+        <label for="pass-new">New passphrase (at least 8 characters)</label>
+        <div class="inline">
+          <input id="pass-new" type="password" autocomplete="new-password">
+          <button id="set-pass" class="primary">Set</button>
+        </div>
+      </div>
+      <div class="inline">
+        <button id="remove-pass">Remove passphrase</button>
+        <button id="lock-now">Lock now</button>
+      </div>
+      <p id="vault-status" class="status"></p>
+    </section>
+
+    <section>
+      <h2>Your notes</h2>
+      <p class="lead">The export is plain JSON — it leaves the vault, so keep it somewhere safe.</p>
+      <div class="inline">
+        <button id="export">Export notes</button>
+        <button id="import">Import notes…</button>
+        <input id="import-file" type="file" accept="application/json" class="hidden">
+        <span class="grow"></span>
+        <button id="erase" class="danger">Erase everything</button>
+      </div>
+      <p id="data-status" class="status"></p>
+    </section>
+
+    <section>
+      <h2>Shortcuts</h2>
+      <div class="kbd">
+        <div><code>Alt+Shift+T</code> — fan out the notes</div>
+        <div><code>Alt+Shift+Space</code> — ask the agent</div>
+        <div><code>Alt+Shift+N</code> — tuck the selection away</div>
+        <div><code>Alt+Shift+P</code> — open the side panel</div>
+        <div><code>Alt+Space</code> (held, in the panel) — talk</div>
+      </div>
+      <p style="margin-bottom:0"><button id="edit-shortcuts">Change these in Chrome</button></p>
+    </section>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

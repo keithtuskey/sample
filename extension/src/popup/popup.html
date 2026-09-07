@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tucky</title>
+  <link rel="stylesheet" href="../ui/base.css">
+  <style>
+    body { width: 320px; padding: 12px; }
+    header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    header strong { font-size: 14px; }
+    textarea { min-height: 76px; }
+    .recent { list-style: none; margin: 12px 0 0; padding: 0; }
+    .recent li { margin-bottom: 6px; }
+    .recent button {
+      width: 100%; text-align: left; border-radius: 10px; padding: 7px 10px;
+      background: var(--raise); border-color: var(--line);
+    }
+    .recent .t { display: block; font-size: 12.5px; color: var(--ink); font-weight: 500; }
+    .recent .m { display: block; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+    .foot { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+    .keys { margin-top: 10px; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../icons/icon32.png" alt="" width="20" height="20">
+    <strong class="grow">Tucky</strong>
+    <span id="mode" class="pill"></span>
+  </header>
+
+  <section id="locked" class="hidden">
+    <p class="muted" style="margin-top:0">Locked. Type your passphrase to open your notes.</p>
+    <input id="passphrase" type="password" placeholder="Passphrase" autocomplete="current-password">
+    <p id="unlock-error" class="muted"></p>
+    <button id="unlock" class="primary">Unlock</button>
+  </section>
+
+  <section id="capture">
+    <textarea id="quick" placeholder="Tuck something away…" aria-label="Quick note"></textarea>
+    <div class="row" style="margin-top:8px">
+      <button id="tuck" class="primary">Tuck it</button>
+      <button id="grab">Grab this page</button>
+      <span class="grow"></span>
+      <span id="status" class="muted" style="font-size:11.5px"></span>
+    </div>
+
+    <ul id="recent" class="recent"></ul>
+
+    <div class="foot">
+      <button id="panel">Open panel</button>
+      <button id="ask">Ask the agent</button>
+      <button id="site" class="ghost"></button>
+      <button id="settings" class="ghost">Settings</button>
+    </div>
+    <p class="muted keys">
+      <code>Alt+Shift+T</code> fan out · <code>Alt+Shift+Space</code> ask · <code>Alt+Shift+N</code> capture
+    </p>
+  </section>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

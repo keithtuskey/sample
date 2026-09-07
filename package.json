@@ -1,0 +1,17 @@
+{
+  "name": "tucky-chrome-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tucky — notes at the edge of every tab, an agent inside. An unpacked Chrome extension with no build step.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test 'test/*.test.mjs'",
+    "test:unit": "node --test test/vault.test.mjs test/agent.test.mjs test/wiring.test.mjs",
+    "test:browser": "node --test test/browser.test.mjs",
+    "icons": "node tools/make-icons.mjs",
+    "screenshot": "node tools/screenshot.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

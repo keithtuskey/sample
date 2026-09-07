@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tucky</title>
+  <link rel="stylesheet" href="../ui/base.css">
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="top">
+    <img src="../icons/icon32.png" alt="" width="20" height="20">
+    <strong class="grow">Tucky</strong>
+    <button id="lock" class="ghost" title="Lock the vault">Lock</button>
+    <button id="settings" class="ghost" title="Settings">Settings</button>
+  </header>
+
+  <section id="locked" class="locked hidden">
+    <h2>Tucky is locked</h2>
+    <p class="muted">Your notes are encrypted on this machine. Type your passphrase to open them.</p>
+    <input id="passphrase" type="password" placeholder="Passphrase" autocomplete="current-password">
+    <p id="unlock-error" class="muted"></p>
+    <button id="unlock" class="primary">Unlock</button>
+  </section>
+
+  <main id="app">
+    <nav class="tabs">
+      <button id="tab-notes" class="tab is-on">Notes</button>
+      <button id="tab-ask" class="tab">Ask</button>
+    </nav>
+
+    <section id="view-notes" class="view">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search your notes" aria-label="Search notes">
+        <button id="new-note" class="primary" title="New note">New</button>
+      </div>
+      <ul id="note-list" class="notes"></ul>
+      <p id="notes-empty" class="empty muted hidden">
+        Nothing tucked away yet. Press <code>Alt+Shift+N</code> on any page, or hit New.
+      </p>
+
+      <section id="editor" class="editor hidden">
+        <div class="row">
+          <input id="note-title" placeholder="Title" aria-label="Note title">
+          <button id="editor-close" class="ghost" title="Back to the list">Back</button>
+        </div>
+        <textarea id="note-body" rows="14" placeholder="Tuck something away…" aria-label="Note body"></textarea>
+        <div class="row wrap">
+          <span id="dots" class="dots"></span>
+          <button id="note-pin" class="ghost">Pin</button>
+          <button id="note-delete" class="ghost">Delete</button>
+          <span class="grow"></span>
+          <select id="rewrite" aria-label="Ask the agent to rewrite this note">
+            <option value="">Rewrite with the agent…</option>
+            <option value="Tidy this up: fix the grammar and tighten it, keeping the voice and every fact.">Tidy up</option>
+            <option value="Summarise this note in at most four sentences.">Summarise</option>
+            <option value="Turn this into a checklist of concrete next actions.">Make a checklist</option>
+            <option value="Pull out the open questions and decisions in this note as a short list.">Pull out decisions</option>
+          </select>
+        </div>
+        <p id="note-status" class="muted small">Saved locally</p>
+      </section>
+    </section>
+
+    <section id="view-ask" class="view hidden">
+      <div id="thread" class="thread">
+        <div class="intro muted">
+          <p>Ask about your notes, the page you're on, or the tabs you have open.</p>
+          <p>Hold <code>Alt</code>+<code>Space</code> — or the mic — and talk.</p>
+        </div>
+      </div>
+      <div id="trace" class="trace muted hidden"></div>
+      <div class="composer">
+        <textarea id="ask-input" rows="2" placeholder="Ask your agent…" aria-label="Ask your agent"></textarea>
+        <div class="row">
+          <button id="mic" title="Hold to talk (or hold Alt+Space)">Hold to talk</button>
+          <span id="mic-state" class="muted small"></span>
+          <span class="grow"></span>
+          <button id="ask-stop" class="ghost hidden">Stop</button>
+          <button id="ask-send" class="primary">Ask</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

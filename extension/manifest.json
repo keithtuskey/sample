@@ -1,0 +1,85 @@
+{
+  "manifest_version": 3,
+  "name": "Tucky — notes at the edge, an agent inside",
+  "short_name": "Tucky",
+  "version": "1.0.0",
+  "description": "Your notes live at the edge of every tab, tucked away until you need them. Reach over — they fan out. Ask the agent from anywhere. Encrypted locally.",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "src/icons/icon16.png",
+    "32": "src/icons/icon32.png",
+    "48": "src/icons/icon48.png",
+    "128": "src/icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Tucky",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "src/icons/icon16.png",
+      "32": "src/icons/icon32.png",
+      "48": "src/icons/icon48.png",
+      "128": "src/icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "src/sidepanel/panel.html"
+  },
+  "options_page": "src/options/options.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "activeTab",
+    "contextMenus",
+    "sidePanel"
+  ],
+  "optional_permissions": [
+    "history",
+    "bookmarks"
+  ],
+  "host_permissions": [
+    "https://api.anthropic.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["*://*/*.pdf"],
+      "js": ["src/content/edge.js"],
+      "css": ["src/content/edge.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "toggle-fan": {
+      "suggested_key": { "default": "Alt+Shift+T" },
+      "description": "Fan out your notes at the edge"
+    },
+    "ask-agent": {
+      "suggested_key": { "default": "Alt+Shift+Space" },
+      "description": "Ask your agent from anywhere"
+    },
+    "quick-capture": {
+      "suggested_key": { "default": "Alt+Shift+N" },
+      "description": "Tuck a new note (uses the current selection)"
+    },
+    "open-panel": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Open the Tucky side panel"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/icons/*.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

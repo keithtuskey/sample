@@ -1,0 +1,13 @@
+/* The host element only. Everything Tucky draws lives inside its shadow root,
+   so no page stylesheet can reach in and no Tucky rule can leak out. */
+#tucky-host {
+  position: fixed;
+  inset: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  z-index: 2147483646;
+  color-scheme: light dark;
+}
