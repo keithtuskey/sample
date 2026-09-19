@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>The Weekly Table — September Recipe Collection</title>
+<meta name="description" content="A searchable collection of seasonal dinner recipes for Middle Tennessee.">
+<style>
+:root{--ink:#1E2621;--muted:#647068;--accent:#A86B12;--tint:#F5ECDD;--paper:#fff;--bg:#E7EAE4;--rule:#D9DDD6;--soft:#F6F7F4}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Helvetica,Arial,sans-serif}
+a{color:inherit}.shell{max-width:1180px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 18px 60px rgba(24,34,27,.08)}
+.topbar{height:7px;background:var(--accent)}
+header{padding:34px 52px 46px;border-bottom:1px solid var(--rule)}.brandrow{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.brand{font-family:Georgia,'Times New Roman',serif;font-size:22px}.month{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.eyebrow{margin:54px 0 10px;color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+h1{font-family:Georgia,'Times New Roman',serif;font-size:52px;line-height:1.04;font-weight:400;font-style:italic;margin:0;max-width:850px}
+.sub{font-family:Georgia,'Times New Roman',serif;color:#3A443E;font-size:19px;line-height:1.6;max-width:800px;margin:22px 0 0}
+.season{padding:30px 52px;background:var(--tint);border-bottom:1px solid #ead9ba}.season h2,.results-head h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:9px}.chip{background:#fff;border:1px solid rgba(168,107,18,.24);border-radius:999px;padding:8px 12px;font-size:13px;color:#6a4c1f}
+.controls{padding:34px 52px 26px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);z-index:5}
+.control-grid{display:grid;grid-template-columns:2fr repeat(5,1fr);gap:10px}.control{display:flex;flex-direction:column;gap:6px}.control label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+input,select,button{font:inherit;border:1px solid #cfd5ce;border-radius:4px;background:#fff;color:var(--ink);padding:11px 12px;min-width:0}
+input:focus,select:focus{outline:2px solid rgba(168,107,18,.22);border-color:var(--accent)}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px}.count{font-size:13px;color:var(--muted)}button{cursor:pointer;background:var(--ink);color:#fff;border-color:var(--ink);padding:10px 16px}
+main{padding:36px 52px 56px}.results-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:22px}.note{font-size:12px;color:var(--muted);line-height:1.5;max-width:520px;text-align:right}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:#fff;display:flex;flex-direction:column;min-height:100%}.card-accent{height:5px;background:var(--accent)}
+.card-body{padding:25px 25px 22px;display:flex;flex-direction:column;flex:1}.kicker{display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.badge{background:var(--tint);padding:5px 8px;border-radius:999px;white-space:nowrap}.card h3{font-family:Georgia,'Times New Roman',serif;font-size:25px;line-height:1.18;font-weight:400;margin:13px 0 9px}
+.card h3 a{text-decoration-thickness:1px;text-underline-offset:3px}.desc{font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.6;color:#3A443E;margin:0 0 17px}
+.meta{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #ECEEEA;border-bottom:1px solid #ECEEEA;margin:0 0 15px}.meta div{padding:10px 8px 10px 0}.meta span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:3px}.meta strong{font-size:13px;font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}.tag{font-size:12px;border:1px solid #E1E5DF;border-radius:999px;padding:5px 8px;color:#536058}
+.rating{font-size:13px;display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:15px}.stars{font-weight:700;color:#7b5314}.source{color:var(--muted);text-align:right}
+.details{font-size:13px;line-height:1.55;color:#4f5c54;background:var(--soft);padding:14px 15px;border-radius:4px;margin-bottom:15px}.details strong{color:var(--ink)}
+.ingredients{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 17px}.ingredients b{color:var(--ink)}
+.card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}.open{display:inline-block;text-decoration:none;background:var(--ink);color:#fff;padding:11px 15px;border-radius:4px;font-size:13px}.verified{font-size:11px;color:#7b857f;text-align:right}
+.empty{grid-column:1/-1;padding:60px 20px;text-align:center;border:1px dashed #cdd3cc;color:var(--muted)}
+footer{border-top:1px solid var(--rule);padding:28px 52px 40px;color:#79837d;font-size:12px;line-height:1.6}
+@media(max-width:920px){.control-grid{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.controls{position:static}}
+@media(max-width:620px){header,.season,.controls,main,footer{padding-left:22px;padding-right:22px}header{padding-top:24px}h1{font-size:37px}.sub{font-size:17px}.brandrow{align-items:flex-start}.control-grid{grid-template-columns:1fr 1fr}.control.search{grid-column:1/-1}.results-head{display:block}.note{text-align:left;margin-top:8px}.meta{grid-template-columns:1fr 1fr}.card-body{padding:21px}.card h3{font-size:23px}.actions{align-items:flex-start}.count{max-width:65%}}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="topbar"></div>
+<header>
+  <div class="brandrow"><div class="brand">The Weekly Table</div><div class="month">September 2026 · Middle Tennessee</div></div>
+  <div class="eyebrow">Seasonal dinner collection</div>
+  <h1>Good produce, one clear protein, and weeknight-scale cooking.</h1>
+  <p class="sub">Ten dinner ideas inspired by Ina Garten’s unfussy approach: confident flavor, straightforward technique, and September produce doing at least half the work on the plate.</p>
+</header>
+<section class="season" aria-label="September seasonal produce">
+  <h2>In season now</h2>
+  <div class="chips">
+    <span class="chip">Tomatoes</span><span class="chip">Peppers</span><span class="chip">Okra</span><span class="chip">Early apples</span><span class="chip">Sweet potatoes</span><span class="chip">Early winter squash</span><span class="chip">Muscadines</span>
+  </div>
+</section>
+<section class="controls" aria-label="Recipe filters">
+  <div class="control-grid">
+    <div class="control search"><label for="search">Search recipe or ingredient</label><input id="search" type="search" placeholder="Try tomato, lamb, apple…"></div>
+    <div class="control"><label for="protein">Protein</label><select id="protein"><option value="">All proteins</option></select></div>
+    <div class="control"><label for="produce">Produce</label><select id="produce"><option value="">All produce</option></select></div>
+    <div class="control"><label for="cuisine">Cuisine</label><select id="cuisine"><option value="">All styles</option></select></div>
+    <div class="control"><label for="method">Method</label><select id="method"><option value="">All methods</option></select></div>
+    <div class="control"><label for="time">Max time</label><select id="time"><option value="">Any</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option><option value="45">45 min</option></select></div>
+  </div>
+  <div class="actions">
+    <div class="count"><strong id="count">10</strong> recipes match</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+      <select id="type" aria-label="Original or adapted"><option value="">Original + adapted</option><option value="Original">Original</option><option value="Adapted">Adapted</option></select>
+      <select id="sort" aria-label="Sort recipes"><option value="rating">Highest rated</option><option value="reviews">Most reviewed</option><option value="fastest">Fastest</option><option value="name">Recipe name</option></select>
+      <button id="reset" type="button">Reset filters</button>
+    </div>
+  </div>
+</section>
+<main>
+  <div class="results-head">
+    <h2>September recipe index</h2>
+    <div class="note">Source ratings and counts were checked on September 18, 2026. Ratings belong to the linked source recipe; adaptations are clearly identified.</div>
+  </div>
+  <div id="grid" class="grid" aria-live="polite"></div>
+</main>
+<footer>
+  The Weekly Table · Seasonal dinners for Middle Tennessee · Servings are scaled for 2–3.<br>
+  Fall accent: #A86B12 · September produce is based on the project’s Middle Tennessee seasonal guide.
+</footer>
+</div>
+<script>
+const RECIPES = [{"id":"marry-me-chicken","name":"Marry Me Chicken with Fresh Tomato & Peppers","cuisine":"Italian-American","protein":"Chicken","produce":["Tomatoes","Peppers"],"total":30,"hands":"15 min","method":"Skillet","type":"Adapted","source":"Once Upon a Chef","sourceName":"Marry Me Chicken","url":"https://www.onceuponachef.com/recipes/marry-me-chicken.html","rating":4.92,"reviews":187,"ingredients":["chicken cutlets","garlic","heavy cream","chicken broth","sun-dried tomatoes","Parmigiano Reggiano","basil","ripe tomatoes","bell peppers"],"description":"Creamy sun-dried-tomato chicken, lightened at the plate with a generous fresh tomato-and-pepper sauté.","changes":"Scaled for 2–3; simplifies the original sauce to nine counted ingredients and adds fresh Tennessee tomatoes and bell peppers so vegetables fill at least half the plate.","plate":"Serve each chicken portion with at least an equal volume of the tomato-pepper mixture.","verified":"September 18, 2026"},{"id":"chicken-schnitzel","name":"Chicken Schnitzel with Apple & Delicata","cuisine":"Central European","protein":"Chicken","produce":["Apples","Winter squash"],"total":45,"hands":"35 min","method":"Skillet","type":"Adapted","source":"Once Upon a Chef","sourceName":"Chicken Schnitzel","url":"https://www.onceuponachef.com/recipes/chicken-schnitzel.html","rating":4.89,"reviews":45,"ingredients":["chicken breasts","panko","all-purpose flour","eggs","paprika","lemon","delicata squash","apples"],"description":"Crisp lemony schnitzel with thin roasted delicata and tart apple for a produce-heavy early-fall plate.","changes":"Scaled for 2–3; streamlines the breading and replaces the usual side with delicata squash and apple. The vegetables and fruit make up at least half the plate.","plate":"Pile the apple-delicata side generously beside one modest schnitzel.","verified":"September 18, 2026"},{"id":"ricotta-turkey-burgers","name":"Ricotta Turkey Burgers with Tomato-Pepper Salad","cuisine":"Italian-American","protein":"Turkey","produce":["Tomatoes","Peppers"],"total":30,"hands":"15 min","method":"Skillet","type":"Adapted","source":"Once Upon a Chef","sourceName":"Skillet Turkey Burgers","url":"https://www.onceuponachef.com/recipes/skillet-turkey-burgers.html","rating":4.93,"reviews":81,"ingredients":["ground turkey","Worcestershire sauce","ricotta","Italian breadcrumbs","Dijon mustard","tomatoes","bell peppers","basil","red-wine vinegar"],"description":"Tender ricotta-enriched turkey patties with a basil-laced tomato and sweet-pepper salad instead of a bun-heavy plate.","changes":"Scaled for 2–3; omits buns and adds a large tomato-pepper-basil salad dressed with red-wine vinegar.","plate":"Make the chopped salad roughly twice the volume of each burger patty.","verified":"September 18, 2026"},{"id":"mustard-pork-muscadines","name":"Mustard Pork Tenderloin with Muscadines & Peppers","cuisine":"Italian-inspired","protein":"Pork","produce":["Muscadines","Peppers"],"total":35,"hands":"15 min","method":"Roast","type":"Adapted","source":"Once Upon a Chef","sourceName":"Glazed Pork Tenderloin","url":"https://www.onceuponachef.com/recipes/pork-tenderloin-mustard-glaze.html","rating":4.95,"reviews":191,"ingredients":["pork tenderloin","light brown sugar","grainy Dijon mustard","dry sherry","rosemary","butter","muscadines","bell peppers"],"description":"Mustard-sherry pork roasted with sweet peppers and muscadines for a simple agrodolce-style fall dinner.","changes":"Scaled for 2–3; adds halved muscadines and sliced peppers to the roasting pan. Source total is 35 minutes plus marinating; hands-on prep is 15 minutes.","plate":"Roast enough peppers and muscadines to cover at least half each dinner plate.","verified":"September 18, 2026"},{"id":"steak-au-poivre","name":"Steak au Poivre with Tomato-Pepper Salad","cuisine":"French","protein":"Beef","produce":["Tomatoes","Peppers"],"total":25,"hands":"10 min","method":"Skillet","type":"Adapted","source":"Once Upon a Chef","sourceName":"Steak au Poivre","url":"https://www.onceuponachef.com/recipes/steak-au-poivre.html","rating":4.81,"reviews":36,"ingredients":["filet mignon","butter","shallot","Cognac","heavy cream","Dijon mustard","tomatoes","bell peppers","parsley"],"description":"Classic pepper-crusted steak and pan sauce balanced by a cool, abundant tomato-and-pepper salad.","changes":"Scaled for 2–3; keeps the core bistro pan sauce and adds a simple tomato-pepper-parsley salad as the vegetable half of the plate.","plate":"Use a smaller steak portion and a broad bed of tomato-pepper salad.","verified":"September 18, 2026"},{"id":"greek-lamb-burgers","name":"Grilled Lamb Burgers with Tomato-Pepper Salad","cuisine":"Mediterranean","protein":"Lamb","produce":["Tomatoes","Peppers"],"total":20,"hands":"Source lists total only","method":"Grill","type":"Adapted","source":"Once Upon a Chef","sourceName":"Lamb Burgers","url":"https://www.onceuponachef.com/recipes/greekstyle-lamb-burgers.html","rating":4.94,"reviews":49,"ingredients":["ground lamb","white bread","milk","shallot","garlic","mint","oregano","tomatoes","bell peppers","red-wine vinegar"],"description":"Herby grilled lamb patties with a bright chopped market salad in place of pita and rich toppings.","changes":"Scaled for 2–3; omits pita and optional toppings, then adds a tomato-pepper salad dressed with red-wine vinegar.","plate":"Serve one modest patty with at least two cups of chopped vegetables across 2–3 servings.","verified":"September 18, 2026"},{"id":"scallops-market-salad","name":"Lemon-Butter Scallops with Tomato-Pepper Basil Salad","cuisine":"Italian coastal","protein":"Scallops","produce":["Tomatoes","Peppers"],"total":15,"hands":"5 min prep","method":"Skillet","type":"Adapted","source":"Once Upon a Chef","sourceName":"Pan-Seared Scallops with Lemon Butter","url":"https://www.onceuponachef.com/recipes/pan-seared-scallops-with-lemon-butter.html","rating":4.87,"reviews":38,"ingredients":["sea scallops","butter","lemon","tomatoes","bell peppers","basil","red-wine vinegar"],"description":"Fast golden scallops with lemon butter and a nearly no-cook tomato, pepper and basil salad.","changes":"Scaled for 2–3; adds the market salad and keeps the original scallop technique intact.","plate":"Keep scallops as the accent and let the tomato-pepper salad occupy at least half the plate.","verified":"September 18, 2026"},{"id":"catfish-okra","name":"Catfish & Okra with Pecan Butter","cuisine":"Southern","protein":"Catfish","produce":["Okra","Tomatoes"],"total":30,"hands":"Not separately listed","method":"Roast","type":"Original","source":"Epicurious","sourceName":"Catfish and Okra with Pecan Butter Sauce","url":"https://www.epicurious.com/recipes/food/views/catfish-and-okra-with-pecan-butter-sauce-236398","rating":4.5,"reviews":12,"ingredients":["okra","grape tomatoes","catfish","Old Bay seasoning","corn","butter","pecans","lemon"],"description":"A naturally produce-forward Southern roast of catfish, okra and tomatoes finished with nutty browned butter.","changes":"Use the published recipe and scale quantities for 2–3 servings. No flavor changes required.","plate":"The recipe already serves the fish over a substantial bed of roasted vegetables.","verified":"September 18, 2026"},{"id":"trout-succotash","name":"Old Bay Trout with Tomato-Pepper Succotash","cuisine":"Southern","protein":"Trout","produce":["Tomatoes","Peppers"],"total":35,"hands":"Not separately listed","method":"Sheet pan","type":"Adapted","source":"Epicurious","sourceName":"Sheet-Pan Old Bay Trout and Succotash","url":"https://www.epicurious.com/recipes/food/views/sheet-pan-old-bay-trout-and-succotash","rating":4.5,"reviews":8,"ingredients":["whole trout","Old Bay seasoning","butter","lemon","corn","green beans","tomato","mayonnaise","bell pepper"],"description":"Old Bay-roasted trout and a foil-packet succotash, with September pepper added for extra color and volume.","changes":"Scaled for 2–3; adds one sliced bell pepper to the original corn, green bean and tomato succotash.","plate":"Make the vegetable packet the largest component on each plate.","verified":"September 18, 2026"},{"id":"egg-salad-tomatoes","name":"Egg Salad–Stuffed Tomatoes with Pepper Relish","cuisine":"American","protein":"Eggs","produce":["Tomatoes","Peppers"],"total":20,"hands":"10 min prep","method":"Low-cook","type":"Adapted","source":"Once Upon a Chef","sourceName":"Best Egg Salad","url":"https://www.onceuponachef.com/recipes/classic-egg-salad.html","rating":4.78,"reviews":131,"ingredients":["eggs","mayonnaise","Dijon mustard","lemon","Worcestershire sauce","scallions","parsley","tomatoes","bell peppers"],"description":"A cool supper of bright egg salad spooned into ripe tomatoes with crunchy sweet-pepper relish.","changes":"Scaled for 2–3; removes sugar and celery, then uses ripe tomatoes as edible cups and bell pepper as a fresh relish.","plate":"Use two tomato halves per serving with extra pepper-tomato salad alongside.","verified":"September 18, 2026"}];
+const $ = function(id){return document.getElementById(id)};
+const els={search:$("search"),protein:$("protein"),produce:$("produce"),cuisine:$("cuisine"),method:$("method"),time:$("time"),type:$("type"),sort:$("sort"),reset:$("reset"),grid:$("grid"),count:$("count")};
+function unique(key){
+  const vals=[];
+  RECIPES.forEach(function(r){
+    const v=r[key];
+    (Array.isArray(v)?v:[v]).forEach(function(x){if(x && vals.indexOf(x)<0)vals.push(x)});
+  });
+  return vals.sort();
+}
+function populate(id,key){
+  unique(key).forEach(function(v){const o=document.createElement("option");o.value=v;o.textContent=v;els[id].appendChild(o)});
+}
+populate("protein","protein");populate("produce","produce");populate("cuisine","cuisine");populate("method","method");
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]})}
+function renderCard(r){
+  return '<article class="card">'+
+    '<div class="card-accent"></div><div class="card-body">'+
+    '<div class="kicker"><span>'+esc(r.cuisine)+'</span><span class="badge">'+esc(r.type)+'</span></div>'+
+    '<h3><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.name)+'</a></h3>'+
+    '<p class="desc">'+esc(r.description)+'</p>'+
+    '<div class="meta"><div><span>Protein</span><strong>'+esc(r.protein)+'</strong></div><div><span>Total</span><strong>'+r.total+' min</strong></div><div><span>Method</span><strong>'+esc(r.method)+'</strong></div><div><span>Hands-on</span><strong>'+esc(r.hands)+'</strong></div><div><span>Serves</span><strong>2–3</strong></div><div><span>Ingredients</span><strong>'+r.ingredients.length+' counted</strong></div></div>'+
+    '<div class="tags">'+r.produce.map(function(p){return '<span class="tag">'+esc(p)+'</span>'}).join('')+'</div>'+
+    '<div class="rating"><span class="stars">★ '+r.rating.toFixed(2)+' / 5 · '+r.reviews+' ratings</span><span class="source">'+esc(r.source)+'</span></div>'+
+    '<div class="details"><strong>'+ (r.type==="Adapted" ? 'Adapted from '+esc(r.sourceName)+'.' : 'Original recipe.') +'</strong> '+esc(r.changes)+'<br><strong>Half-plate rule:</strong> '+esc(r.plate)+'</div>'+
+    '<p class="ingredients"><b>Key ingredients:</b> '+r.ingredients.map(esc).join(', ')+'</p>'+
+    '<div class="card-footer"><a class="open" href="'+esc(r.url)+'" target="_blank" rel="noopener">Open Recipe ↗</a><div class="verified">Source rating verified<br>'+esc(r.verified)+'</div></div>'+
+    '</div></article>';
+}
+function apply(){
+  const q=els.search.value.trim().toLowerCase();
+  let rows=RECIPES.filter(function(r){
+    const hay=[r.name,r.cuisine,r.protein,r.method,r.description,r.ingredients.join(" "),r.produce.join(" ")].join(" ").toLowerCase();
+    return (!q||hay.indexOf(q)>=0) &&
+      (!els.protein.value||r.protein===els.protein.value) &&
+      (!els.produce.value||r.produce.indexOf(els.produce.value)>=0) &&
+      (!els.cuisine.value||r.cuisine===els.cuisine.value) &&
+      (!els.method.value||r.method===els.method.value) &&
+      (!els.time.value||r.total<=Number(els.time.value)) &&
+      (!els.type.value||r.type===els.type.value);
+  });
+  const s=els.sort.value;
+  rows.sort(function(a,b){
+    if(s==="reviews")return b.reviews-a.reviews||b.rating-a.rating;
+    if(s==="fastest")return a.total-b.total||b.rating-a.rating;
+    if(s==="name")return a.name.localeCompare(b.name);
+    return b.rating-a.rating||b.reviews-a.reviews;
+  });
+  els.count.textContent=rows.length;
+  els.grid.innerHTML=rows.length?rows.map(renderCard).join(""):'<div class="empty">No recipes match those filters. Reset or broaden your search.</div>';
+}
+["search","protein","produce","cuisine","method","time","type","sort"].forEach(function(k){els[k].addEventListener(k==="search"?"input":"change",apply)});
+els.reset.addEventListener("click",function(){["search","protein","produce","cuisine","method","time","type"].forEach(function(k){els[k].value=""});els.sort.value="rating";apply()});
+apply();
+</script>
+</body>
+</html>
